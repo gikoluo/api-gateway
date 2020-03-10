@@ -10,14 +10,15 @@ json = require("cjson")
 --}
 
 redis_config = {
-    host = '172.16.0.223',
+    host = "redis",
     --host = '172.16.0.121',
     port = 6379,
-    auth_pwd = '123456',
+    auth_pwd = "redis", 
     db = 8,
     alive_time = 3600 * 24 * 7,
     channel = 'gw'
 }
+
 
 --mq_conf = {
 --	host = '172.16.0.121',
@@ -27,11 +28,16 @@ redis_config = {
 --	vhost = '/'
 --}
 
-token_secret = "pXFb4i%*834gfdh96(3df&%18iodGq4ODQyMzc4lz7yI6ImF1dG"
+token_secret = os.getenv('TOKEN_SECRET')
+
+
+
 logs_file = '/var/log/gw.log'
 
 --刷新权限到redis接口
 rewrite_cache_url = 'http://mg.opendevops.cn:8010/v2/accounts/verify/'
+
+-- 注意：rewrite_cache_token要和codo-admin里面的secret_key = '8b888a62-3edb-4920-b446-697a472b4001'保持一致
 rewrite_cache_token = '8b888a62-3edb-4920-b446-697a472b4001'
 
 --并发限流配置

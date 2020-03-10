@@ -44,25 +44,27 @@ local http = require "resty.http"
 
 -- 对接权限系统的redis
 function get_verify(user_id, uri, method)
-    local my_verify = my_cache.smembers(user_id .. method)
-    local all_verify = my_cache.smembers(user_id .. 'ALL')
+    return true
 
-    for k, v in ipairs(my_verify) do
-        --ngx.log(ngx.ERR,'line----->',v)
-        local is_exit = string.find(uri, "^" .. v)
-        if is_exit == 1 then
-            return true
-        end
-    end
+    -- local my_verify = my_cache.smembers(user_id .. method)
+    -- local all_verify = my_cache.smembers(user_id .. 'ALL')
 
-    for k, v in ipairs(all_verify) do
-        --ngx.log(ngx.ERR,'line----->',v)
-        local is_exit = string.find(uri, "^" .. v)
-        if is_exit == 1 then
-            return true
-        end
-    end
-    return false
+    -- for k, v in ipairs(my_verify) do
+    --     --ngx.log(ngx.ERR,'line----->',v)
+    --     local is_exit = string.find(uri, "^" .. v)
+    --     if is_exit == 1 then
+    --         return true
+    --     end
+    -- end
+
+    -- for k, v in ipairs(all_verify) do
+    --     --ngx.log(ngx.ERR,'line----->',v)
+    --     local is_exit = string.find(uri, "^" .. v)
+    --     if is_exit == 1 then
+    --         return true
+    --     end
+    -- end
+    -- return false
 end
 
 function write_verify(user_id, is_superuser)
